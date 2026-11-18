@@ -5,13 +5,21 @@ download.
 
 | File | What it is |
 |---|---|
-| `BudgetPlanner.html` | The product. One file, zero dependencies, works fully offline. This is what you upload to the Etsy listing. |
-| `ETSY-LISTING.md` | Ready-to-paste listing kit: title, description, tags, image plan, buyer message, pricing guidance. |
+| `BudgetPlanner.html` | The product. One file, no dependencies, works fully offline. |
+| `HOW-TO-OPEN.html` | Source for the buyer's one-page `How-To-Open.pdf` guide (print it to PDF at US Letter size). |
+| `ETSY-LISTING.md` | Ready-to-paste listing kit: payment and delivery setup, title, description with AI disclosure, tags, image plan, buyer message, pricing. |
+
+## What gets uploaded to Etsy
+
+`BudgetPlanner.zip`, containing `BudgetPlanner.html` and `How-To-Open.pdf`.
+Build the ZIP locally and upload it only to the Etsy listing. Never commit
+it to this repository: if the repository is public, anyone could download
+the product for free.
 
 ## Try it
 
-Open `BudgetPlanner.html` in any browser (double-click it). No build step,
-no server, no internet required.
+Open `BudgetPlanner.html` in a computer browser (double-click it). There's
+no build step and no server, and no internet connection is needed.
 
 ## Product features
 
@@ -23,12 +31,15 @@ no server, no internet required.
 - Light / dark theme
 - CSV export per month (formula-injection-safe), JSON backup & restore
 - Print-friendly layout
-- All data stays in the buyer's browser (`localStorage`) — fully private
+- All data stays in the buyer's browser (`localStorage`), fully private
 
 ## Why not an iOS app?
 
 Etsy can only deliver files, and Apple only distributes iOS apps through
-the App Store — so an installable iOS app cannot be sold on Etsy. A
-single-file web app is the standard format for "app" products on Etsy, and
-it runs on iPhone/iPad via Safari (Share → Add to Home Screen gives it a
-home-screen icon).
+the App Store, so an installable iOS app can't be sold on Etsy. A
+single-file web app is the standard format for "app" products on Etsy.
+
+As a downloaded file, it's a **computer** product. On iPhone, iPad and
+Android, a downloaded HTML file opens in a preview mode that may not run
+the planner. Supporting phones would mean hosting the planner at a private
+link that buyers open in mobile Safari or Chrome.
