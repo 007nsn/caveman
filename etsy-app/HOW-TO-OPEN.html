@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Budget Planner — Getting Started</title>
+<style>
+  /* Source for How-To-Open.pdf (rendered to US Letter). Shipped inside the buyer ZIP. */
+  @page { size: Letter; margin: 0.6in 0.7in; }
+  :root {
+    --ink: #2b2a27;
+    --soft: #5f5c55;
+    --line: #dcd7cc;
+    --green: #3d7a5d;
+    --green-tint: #e7f0eb;
+    --amber-tint: #f7efe1;
+    --amber: #8a6424;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Carlito", "Calibri", Arial, sans-serif;
+    color: var(--ink);
+    font-size: 11pt;
+    line-height: 1.45;
+    background: #fff;
+  }
+  header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 2px solid var(--green);
+    padding-bottom: 10px; margin-bottom: 18px;
+  }
+  .brand { font-family: "Bitstream Charter", Georgia, serif; font-size: 22pt; font-weight: 700; letter-spacing: -0.01em; }
+  .brand span { color: var(--green); }
+  .sub { font-size: 10pt; color: var(--soft); text-transform: uppercase; letter-spacing: 0.08em; }
+  .lede { font-size: 12pt; max-width: 62ch; margin-bottom: 16px; }
+
+  ol.steps { list-style: none; counter-reset: step; display: grid; gap: 12px; }
+  ol.steps > li {
+    counter-increment: step;
+    display: grid; grid-template-columns: 30px 1fr; gap: 12px;
+    break-inside: avoid;
+  }
+  ol.steps > li::before {
+    content: counter(step);
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--green); color: #fff;
+    font-family: "Bitstream Charter", Georgia, serif; font-weight: 700; font-size: 12pt;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  h2 { font-family: "Bitstream Charter", Georgia, serif; font-size: 13pt; margin-bottom: 3px; }
+  p + p, p + ul, ul + p { margin-top: 4px; }
+  ul.os { list-style: none; display: grid; gap: 2px; margin-top: 4px; }
+  ul.os li b { display: inline-block; min-width: 92px; }
+  code {
+    font-family: "JetBrains Mono", "DejaVu Sans Mono", monospace;
+    font-size: 9.5pt; background: #f2f0ea; padding: 1px 5px; border-radius: 3px;
+  }
+  .note {
+    margin-top: 16px; padding: 10px 14px; border-radius: 6px;
+    background: var(--amber-tint); border-left: 3px solid var(--amber);
+    break-inside: avoid;
+  }
+  .note h3, .help h3 { font-family: "Bitstream Charter", Georgia, serif; font-size: 11.5pt; margin-bottom: 2px; }
+  .help {
+    margin-top: 12px; padding: 10px 14px; border-radius: 6px;
+    background: var(--green-tint); break-inside: avoid;
+  }
+  footer { margin-top: 16px; font-size: 9pt; color: var(--soft); border-top: 1px solid var(--line); padding-top: 8px; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">Budget<span>Planner</span></div>
+    <div class="sub">Getting started</div>
+  </header>
+
+  <p class="lede">Thank you for your purchase. Your planner is a single file that runs in your web browser.
+  You don't need an account, an install or an internet connection, and everything you enter stays on your own computer.</p>
+
+  <ol class="steps">
+    <li><div>
+      <h2>Download your file from Etsy</h2>
+      <p>On Etsy, go to <b>You → Purchases and reviews</b> and click <b>Download Files</b>.
+      You'll get <code>BudgetPlanner.zip</code>.</p>
+    </div></li>
+
+    <li><div>
+      <h2>Unzip it into a permanent folder</h2>
+      <p>Choose a folder you'll keep, such as <b>Documents</b>, rather than leaving the file in Downloads.</p>
+      <ul class="os">
+        <li><b>Windows</b> Right-click the ZIP → <b>Extract All</b></li>
+        <li><b>Mac</b> Double-click the ZIP</li>
+        <li><b>Chromebook</b> Open the ZIP in Files and drag the contents out</li>
+      </ul>
+    </div></li>
+
+    <li><div>
+      <h2>Open the planner</h2>
+      <p>Double-click <code>BudgetPlanner.html</code>. It opens in your browser: Chrome, Edge, Safari and Firefox all work.
+      Bookmark the page so you can come back to it in one click.</p>
+    </div></li>
+
+    <li><div>
+      <h2>Start tracking</h2>
+      <p>Add your income and expenses with the form at the top of <b>Transactions</b>. Set monthly limits under
+      <b>Category budgets → Edit</b>, and use <b>Settings</b> to change your currency symbol or categories.
+      Everything saves automatically as you go.</p>
+    </div></li>
+
+    <li><div>
+      <h2>Back up once a month</h2>
+      <p>Click <b>Backup</b> to save a copy of all your data. Use <b>Restore</b> to load it on another computer
+      or in another browser. Always open the same copy of the file in the same browser: clearing your
+      browser's history and site data also erases what you've entered, unless you have a backup.</p>
+    </div></li>
+  </ol>
+
+  <div class="note">
+    <h3>Phones and tablets</h3>
+    <p>BudgetPlanner is designed for a computer browser. Phones and tablets open downloaded files in a
+    preview mode that may not run the planner, so for the best experience use it on a computer.</p>
+  </div>
+
+  <div class="help">
+    <h3>Need help?</h3>
+    <p>Send me a message through Etsy and I'll get back to you. If something isn't working, I'll fix it.</p>
+  </div>
+
+  <footer>For personal use on your own devices. Please don't share or resell the file.
+  This planner was designed with the help of AI tools.</footer>
+</body>
+</html>
