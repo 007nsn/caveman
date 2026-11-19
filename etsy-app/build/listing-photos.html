@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Listing photos</title>
+<!--
+  Etsy listing photo templates. build.js screenshots each <section class="slide">
+  at 1500x1125 CSS px x2 = 3000x2250 (4:3, Etsy's thumbnail ratio).
+  Images in shots/ are real screenshots of BudgetPlanner.html taken by build.js.
+-->
+<style>
+  :root {
+    --paper: #f3f0e8;
+    --paper-2: #fbfaf6;
+    --ink: #262521;
+    --soft: #5f5c55;
+    --green: #3d7a5d;
+    --green-deep: #1d3a2e;
+    --green-mist: #a9cbb9;
+    --green-tint: #e3eee7;
+    --amber: #b4873d;
+    --red: #b4553d;
+    --display: "Bitstream Charter", Georgia, serif;
+    --body: "Carlito", "Calibri", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #888; font-family: var(--body); color: var(--ink); }
+  .slide {
+    width: 1500px; height: 1125px; position: relative; overflow: hidden;
+    background: var(--paper); padding: 84px 96px;
+    display: flex; flex-direction: column;
+  }
+  .slide.deep { background: var(--green-deep); color: #f2efe7; }
+  .slide.mist { background: var(--green-tint); }
+
+  .eyebrow {
+    font-size: 23px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--green); font-weight: 700;
+  }
+  .deep .eyebrow { color: var(--green-mist); }
+  h1, h2 { font-family: var(--display); font-weight: 700; letter-spacing: -0.015em; text-wrap: balance; }
+  h1 { font-size: 132px; line-height: 0.95; }
+  h2 { font-size: 78px; line-height: 1.02; max-width: 1150px; }
+  .lede { font-size: 34px; line-height: 1.3; color: var(--soft); max-width: 980px; margin-top: 18px; }
+  .deep .lede { color: #c9d6ce; }
+  .accent { color: var(--green); }
+  .deep .accent { color: var(--green-mist); }
+
+  /* laptop mockup, drawn in CSS */
+  .laptop { position: absolute; }
+  .laptop .screen {
+    background: #18181a; border-radius: 26px 26px 6px 6px; padding: 20px 20px 26px;
+    box-shadow: 0 40px 80px rgba(20, 30, 25, 0.28);
+  }
+  .laptop .screen img { display: block; width: 100%; border-radius: 4px; }
+  .laptop .base {
+    height: 30px; margin: 0 -70px;
+    background: linear-gradient(#d9d7d2, #a9a7a2);
+    border-radius: 0 0 26px 26px; position: relative;
+  }
+  .laptop .base::before {
+    content: ""; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+    width: 210px; height: 12px; background: #8d8b86; border-radius: 0 0 12px 12px;
+  }
+  .deep .laptop .base { background: linear-gradient(#5b6a62, #34423b); }
+  .deep .laptop .base::before { background: #26332c; }
+
+  .pills { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+  .pill {
+    font-size: 26px; font-weight: 700; padding: 10px 24px; border-radius: 999px;
+    background: var(--green); color: #fff;
+  }
+  .pill.ghost { background: transparent; color: var(--green); box-shadow: inset 0 0 0 2.5px var(--green); }
+
+  .frame {
+    background: var(--paper-2); border-radius: 22px; padding: 26px;
+    box-shadow: 0 24px 60px rgba(30, 40, 35, 0.16);
+  }
+  .frame img { display: block; width: 100%; border-radius: 10px; }
+
+  .callout {
+    display: flex; align-items: center; gap: 16px; font-size: 28px; font-weight: 700;
+  }
+  .swatch { width: 54px; height: 14px; border-radius: 999px; }
+
+  /* steps */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px; margin-top: auto; }
+  .step { background: var(--paper-2); border-radius: 22px; padding: 48px 36px; min-height: 500px; box-shadow: 0 18px 44px rgba(30,40,35,0.10); }
+  .num {
+    width: 96px; height: 96px; border-radius: 50%; background: var(--green); color: #fff;
+    font-family: var(--display); font-weight: 700; font-size: 56px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 36px;
+  }
+  .step h3 { font-family: var(--display); font-size: 54px; line-height: 1.05; margin-bottom: 16px; }
+  .step p { font-size: 32px; line-height: 1.3; color: var(--soft); }
+  .footnote { margin-top: 52px; font-size: 28px; color: var(--soft); }
+  .footnote b { color: var(--ink); }
+
+  /* feature checklist */
+  .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 50px 70px; margin-top: auto; margin-bottom: auto; }
+  .check { display: flex; gap: 26px; align-items: flex-start; font-size: 44px; line-height: 1.15; font-weight: 700; }
+  .tick {
+    flex: none; width: 58px; height: 58px; border-radius: 50%; background: var(--green);
+    position: relative; margin-top: -2px;
+  }
+  .tick::after {
+    content: ""; position: absolute; left: 20px; top: 11px; width: 14px; height: 28px;
+    border: solid #fff; border-width: 0 6px 6px 0; transform: rotate(45deg);
+  }
+  .check small { display: block; font-size: 30px; font-weight: 400; color: var(--soft); margin-top: 6px; }
+
+  /* files */
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: auto; }
+  .file { display: flex; flex-direction: column; gap: 26px; }
+  .file .thumb {
+    height: 560px; border-radius: 22px; overflow: hidden; background: var(--paper-2);
+    box-shadow: 0 24px 60px rgba(30,40,35,0.16); position: relative;
+  }
+  .file .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+  .file .tag {
+    position: absolute; right: 22px; bottom: 22px; font-size: 22px; font-weight: 700; letter-spacing: 0.08em;
+    padding: 8px 16px; border-radius: 8px; color: #fff;
+  }
+  .file .name { font-family: "JetBrains Mono", monospace; font-size: 30px; font-weight: 700; }
+  .file .desc { font-size: 28px; color: var(--soft); margin-top: -18px; }
+
+  /* privacy */
+  .points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: auto; }
+  .point { border-top: 3px solid var(--green-mist); padding-top: 26px; }
+  .point h3 { font-family: var(--display); font-size: 56px; line-height: 1.05; margin-bottom: 16px; }
+  .point p { font-size: 33px; line-height: 1.3; color: #c9d6ce; }
+  .lock { position: absolute; right: 120px; top: 120px; width: 270px; height: 330px; }
+</style>
+</head>
+<body>
+
+<!-- 1. Hero -->
+<section class="slide" id="p1" style="justify-content:center">
+  <div class="eyebrow">Instant digital download</div>
+  <h1 style="margin-top:22px">Budget<br><span class="accent">Planner</span></h1>
+  <p class="lede" style="max-width:520px">A private money tracker that runs in your browser.</p>
+  <div class="pills" style="flex-direction:column; align-items:flex-start; gap:12px">
+    <span class="pill">No subscription</span>
+    <span class="pill ghost">Works offline</span>
+    <span class="pill ghost">No account needed</span>
+  </div>
+  <div class="laptop" style="left:610px; top:250px; width:810px">
+    <div class="screen"><img src="../dist/shots/app-light.png" alt=""></div>
+    <div class="base"></div>
+  </div>
+</section>
+
+<!-- 2. Dark mode -->
+<section class="slide deep" id="p2">
+  <div class="eyebrow">Light &amp; dark mode</div>
+  <h2 style="margin-top:18px">Easy on the eyes, <span class="accent">day or night</span></h2>
+  <div class="laptop" style="left:275px; top:300px; width:950px">
+    <div class="screen"><img src="../dist/shots/app-dark.png" alt=""></div>
+    <div class="base"></div>
+  </div>
+</section>
+
+<!-- 3. Summary close-up -->
+<section class="slide" id="p3">
+  <div class="eyebrow">Monthly summary</div>
+  <h2 style="margin-top:18px">Know where you stand <span class="accent">at a glance</span></h2>
+  <p class="lede">Income, spending, balance and savings rate update the moment you add a transaction.</p>
+  <div class="frame" style="margin-top:auto">
+    <img src="../dist/shots/summary.png" alt="">
+  </div>
+</section>
+
+<!-- 4. Chart + budgets -->
+<section class="slide" id="p4">
+  <div class="eyebrow">Spending &amp; budgets</div>
+  <h2 style="margin-top:18px">See where it goes. <span class="accent">Catch overspending early.</span></h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:auto; align-items:center">
+    <div class="frame"><img src="../dist/shots/chart.png" alt=""></div>
+    <div style="display:flex; flex-direction:column; gap:26px">
+      <div class="frame"><img src="../dist/shots/budgets.png" alt=""></div>
+      <div style="display:flex; gap:34px; padding-left:8px">
+        <div class="callout"><span class="swatch" style="background:var(--amber)"></span>Near your limit</div>
+        <div class="callout"><span class="swatch" style="background:var(--red)"></span>Over budget</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. What you get -->
+<section class="slide mist" id="p5">
+  <div class="eyebrow">What you get</div>
+  <h2 style="margin-top:18px">One ZIP file, <span class="accent">two files inside</span></h2>
+  <div class="files">
+    <div class="file">
+      <div class="thumb"><img src="../dist/shots/app-light.png" alt=""><span class="tag" style="background:var(--green)">HTML</span></div>
+      <div class="name">BudgetPlanner.html</div>
+      <div class="desc">The planner. Double-click to open it in your browser.</div>
+    </div>
+    <div class="file">
+      <div class="thumb"><img src="../dist/shots/guide.png" alt=""><span class="tag" style="background:var(--red)">PDF</span></div>
+      <div class="name">How-To-Open.pdf</div>
+      <div class="desc">A one-page guide to get you started.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. How it works -->
+<section class="slide" id="p6">
+  <div class="eyebrow">How it works</div>
+  <h2 style="margin-top:18px">Up and running <span class="accent">in two minutes</span></h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h3>Download</h3><p>Get the ZIP from your Etsy Purchases page right after checkout.</p></div>
+    <div class="step"><div class="num">2</div><h3>Unzip</h3><p>Save it to a folder you'll keep, like Documents.</p></div>
+    <div class="step"><div class="num">3</div><h3>Open</h3><p>Double-click the file. It opens in your web browser.</p></div>
+    <div class="step"><div class="num">4</div><h3>Track</h3><p>Add income and expenses. Everything saves automatically.</p></div>
+  </div>
+  <p class="footnote">Works in <b>Chrome, Edge, Safari and Firefox</b> on <b>Windows, Mac and Chromebook</b>. Designed for computers, not phones or tablets.</p>
+</section>
+
+<!-- 7. Features -->
+<section class="slide" id="p7">
+  <div class="eyebrow">Features</div>
+  <h2 style="margin-top:18px">Everything you need, <span class="accent">nothing you don't</span></h2>
+  <div class="checks">
+    <div class="check"><span class="tick"></span><div>Income &amp; expense tracking<small>Month by month, with easy navigation</small></div></div>
+    <div class="check"><span class="tick"></span><div>Balance &amp; savings rate<small>Calculated for you automatically</small></div></div>
+    <div class="check"><span class="tick"></span><div>Spending by category<small>A clear chart of where it goes</small></div></div>
+    <div class="check"><span class="tick"></span><div>Category budgets<small>Progress bars with overspend warnings</small></div></div>
+    <div class="check"><span class="tick"></span><div>Your categories, your currency<small>$, €, £, ¥ and more</small></div></div>
+    <div class="check"><span class="tick"></span><div>Export to CSV<small>Opens in Excel, Google Sheets, Numbers</small></div></div>
+    <div class="check"><span class="tick"></span><div>Backup &amp; restore<small>Move your data in one click</small></div></div>
+    <div class="check"><span class="tick"></span><div>Light &amp; dark mode<small>Plus print-friendly reports</small></div></div>
+  </div>
+</section>
+
+<!-- 8. Privacy -->
+<section class="slide deep" id="p8">
+  <div class="eyebrow">Private by design</div>
+  <h2 style="margin-top:18px; max-width:950px; font-size:104px">Your numbers never <span class="accent">leave your computer</span></h2>
+  <svg class="lock" viewBox="0 0 230 280" aria-hidden="true">
+    <path d="M55 120 V80 a60 60 0 0 1 120 0 V120" fill="none" stroke="#a9cbb9" stroke-width="22" stroke-linecap="round"/>
+    <rect x="15" y="115" width="200" height="155" rx="26" fill="#3d7a5d"/>
+    <circle cx="115" cy="180" r="20" fill="#1d3a2e"/>
+    <rect x="106" y="188" width="18" height="44" rx="8" fill="#1d3a2e"/>
+  </svg>
+  <div class="points">
+    <div class="point"><h3>No account</h3><p>No sign-up, no email, no password. Just open the file.</p></div>
+    <div class="point"><h3>No cloud</h3><p>Nothing is uploaded or tracked. It works fully offline.</p></div>
+    <div class="point"><h3>You hold the backup</h3><p>Save your data to a file you keep, and restore it any time.</p></div>
+  </div>
+</section>
+
+</body>
+</html>

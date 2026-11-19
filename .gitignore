@@ -5,6 +5,10 @@
 /docs
 /.playwright-mcp
 current-site-full.png
+
+# Etsy upload kit: built output (product ZIP, listing photos). Never commit.
+/etsy-app/dist/
+/etsy-app/build/node_modules/
 /bin/cavekit-bin
 
 # Cavekit runtime — transient state written by the autonomous loop.
